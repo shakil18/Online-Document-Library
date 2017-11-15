@@ -8,15 +8,31 @@
 Systems Engineering 2 - Assignment 1
 ====================================
 
+Preparing the repository
+------------------------
+
+* Clone this repository: ``git clone https://bitbucket.org/se2ws1718/assignment-1``
+* Add your repository as remote. Let's assume your repository is https://bitbucket.org/se2ws1718/a1p00:
+
+  * go to the corresponding directory: ``cd assignment-1``
+  * change the remote: ``git remote set-url origin git@bitbucket.org:se2ws1718/a1p00``
+  * update the repo: ``git push -u origin master``
+
 Organisation
 ------------
 
-* **deadline:** January 11th 2017 11:59pm
+* **deadline:** January 12th, 2018 11:59pm
+* you will have two opportunities to test your solution before the deadline. We will test all repositories on *December 15th, 2017* and *January 9th, 2018* and publish the results on the course website.
+
+   * mind that the results of these tests are not graded. Only the final result matters.
+   * if your solution fails a test, you will *not* recieve a detailed explanation of the reasons why it failed. Your task is to figure it out on your own. 
+
 * git usage is mandatory (multiple commits with meaningful messages)
 * Go is mandatory
 * you have to work alone
 * don't share code
 * ask questions in the `Auditorium <https://auditorium.inf.tu-dresden.de/en/groups/110631002>`_
+
 
 Task description
 ----------------
@@ -154,8 +170,6 @@ Links
 Git
 ---
 
-* clone this repository (https://bitbucket.org/se2ws1617/assignment-1)
-* add your repository (e.g., https://bitbucket.org/se2ws1617/a1p01) as remote
 * push changes to *your* repo
 * if you find bugs in provided files or the documentation, feel free to open a pull request on Bitbucket
 
