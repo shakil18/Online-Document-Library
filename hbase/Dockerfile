@@ -19,7 +19,7 @@ MAINTAINER Hari Sekhon (https://www.linkedin.com/in/harisekhon)
 #ARG HBASE_VERSION=0.98.23
 #ARG HBASE_VERSION=1.0.3
 #ARG HBASE_VERSION=1.1.7
-ARG HBASE_VERSION=1.2.4
+ARG HBASE_VERSION=1.2.6
 
 ENV PATH $PATH:/hbase/bin
 
@@ -31,7 +31,7 @@ LABEL Description="HBase Dev", \
 WORKDIR /
 
 RUN \
-    apk add --no-cache bash openjdk8-jre-base wget tar && \
+    apk add --no-cache bash openjdk8-jre-base wget tar openssh && \
     # HBase 0.94
     if   [ "${HBASE_VERSION:0:4}" = "0.94" ]; then url="http://www.apache.org/dyn/closer.lua?filename=hbase/hbase-$HBASE_VERSION/hbase-$HBASE_VERSION.tar.gz&action=download"; \
     # HBase 0.96 usually missing from mirrors, have to use apache archive
