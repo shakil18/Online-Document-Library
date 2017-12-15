@@ -22,12 +22,7 @@ services:
       se_backend:
         aliases:
           - zookeeper
-  grproxy:
-    build: ./grproxy/
-    container_name: grproxy
-    networks:
-      - se_frontend
-      - se_backend
+  #grproxy:
   #gserve1:
   #gserve2:
 
