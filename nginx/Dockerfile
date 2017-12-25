@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-MAINTAINER Azizul_Hakim_Shakil
+MAINTAINER Azizul Hakim Shakil <Azizul_Hakim.Shakil@mailbox.tu-dresden.de>
 
 RUN apk update
 
