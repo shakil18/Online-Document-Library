@@ -20,19 +20,19 @@ func main() {
 	flags := int32(0)
 
 	for conn.State() != zk.StateHasSession {
-		fmt.Printf("Zookeeper is loading... \n")
+		fmt.Printf("grproxy is loading the Zookeeper \n...")
 		time.Sleep(5)
 	}
 
 	acl := zk.WorldACL(zk.PermAll)
 
 	exists, stat, err := conn.Exists("/grproxy")
-	errHndlr(err)
+	must(err)
 	fmt.Printf("exists: %+v %+v\n", exists, stat)
 
 	if !exists {
 		grproxy, err := conn.Create("/grproxy", []byte("grproxy:80"), flags, acl)
-		errHndlr(err)
+		must(err)
 		fmt.Printf("create: %+v\n", grproxy)
 	}
 
@@ -69,16 +69,36 @@ func connect() *zk.Conn {
 	zksStr := "zookeeper:2181"
 	zks := strings.Split(zksStr, ",")
 	conn, _, err := zk.Connect(zks, time.Second)
-	errHndlr(err)
+	must(err)
 	return conn
 }
 
-func errHndlr(err error) {
+func must(err error) {
 	if err != nil {
 		//panic(err)
-		fmt.Printf("%+v from errHndlr \n", err)
+		fmt.Printf("%+v From must \n", err)
 	}
 }
+
+func NewMultipleHostReverseProxy() *httputil.ReverseProxy {
+	director := func(req *http.Request) {
+
+		if req.URL.Path == "/library" {
+			fmt.Println("This is for gserver")
+			target := urls[rand.Int()%len(urls)]
+			req.URL.Scheme = "http"
+			req.URL.Host = target
+
+		} else {
+			fmt.Println("This is for nginx")
+			req.URL.Scheme = "http"
+			req.URL.Host = "nginx"
+		}
+
+	}
+	return &httputil.ReverseProxy{Director: director}
+}
+
 
 func monitorGserver(conn *zk.Conn, path string) (chan []string, chan error) {
 
@@ -102,22 +122,6 @@ func monitorGserver(conn *zk.Conn, path string) (chan []string, chan error) {
 	return servers, errors
 }
 
-func NewMultipleHostReverseProxy() *httputil.ReverseProxy {
-	director := func(req *http.Request) {
 
-		if req.URL.Path == "/library" {
-			fmt.Println("This is for gserver")
-			target := urls[rand.Int()%len(urls)]
-			req.URL.Scheme = "http"
-			req.URL.Host = target
 
-		} else {
 
-			fmt.Println("This is for nginx")
-			req.URL.Scheme = "http"
-			req.URL.Host = "nginx"
-		}
-
-	}
-	return &httputil.ReverseProxy{Director: director}
-}

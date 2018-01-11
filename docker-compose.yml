@@ -23,6 +23,10 @@ services:
           - zookeeper
 
   grproxy:
+    depends_on:
+      - nginx
+      - gserve1
+      - gserve2
     build: ./grproxy/
     container_name: grproxy
     ports: 
@@ -32,6 +36,8 @@ services:
       - se_backend
 
   gserve1:
+    depends_on:
+      - hbase
     build: ./gserve/
     container_name: gserve1
     environment:
@@ -40,6 +46,8 @@ services:
       - se_backend
 
   gserve2:
+    depends_on:
+      - hbase
     build: ./gserve/
     container_name: gserve2
     environment:

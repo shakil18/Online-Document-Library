@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>SE 2 Library</title>
+    </head>
+    <body>
+        <h1>SE2 Library</h1>
+        <div name="library">
+                {{range . Row}}
+                    <label>Document ID</label> <label>{{.key}}</label>
+                    {{range . Cell}}
+                         {{ if .column := "document" }}
+                             <h2>Document<h2>
+                         {{end}}
+                          {{ if .column := "metadata" }}
+                             <h2>Metadata<h2>
+                         {{end}}
+                        
+                        <label>{{.column}}</label>
+                        <label>{{.value}}</label>
+                    {{end}}
+                {{end}}
+            
+                <!--<label>Document ID</label> <label>Document ID</label> -->
+
+                <!-- Document -->
+                <!--<div class="row">
+                    <h2>Document<h2>
+                    <label>Document key</label>
+                    <label>Document value</label>
+                </div>
+                <div class="row"></div>-->
+
+                <!-- Metadata -->
+                <!--<div class="row">
+                    <h2>Metadata<h2>
+                    <label>metadata key</label>
+                    <label>metadata value</label>
+                </div>
+                <div class="row"></div>       -->
+        </div>
+    </body>
+</html>
